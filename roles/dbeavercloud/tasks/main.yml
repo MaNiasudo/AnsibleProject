@@ -25,3 +25,9 @@
     path: "{{ DEBEAVER_DIR }}/.env"
     line: "REPLICA_COUNT_EE=1"
     create: yes
+
+
+- name: create and start docker compose services
+  community.docker.docker_compose_v2:
+    project_src: "{{ DEBEAVER_DIR }}"
+    state: present
