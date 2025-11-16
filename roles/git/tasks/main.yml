@@ -1,0 +1,13 @@
+---
+- name: Install Git
+  ansible.builtin.package:   # We use this instead of apt so it can installed anywhere debian/arch/centos
+    name: git
+    state: present
+    update_cache: yes
+
+      # a repo for our git files
+- name: create a repo file for my db clone
+  ansible.builtin.file:
+    path: /home/mania/myrepo
+    state: directory
+    mode: "0755"   # Give it permission rwxr-xr-x

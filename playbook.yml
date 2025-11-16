@@ -2,4 +2,8 @@
 - name: Example ansible playbook
   hosts: small
   remote_user: mania
+  become: true
+  roles:
     - python
+    - git
+  
