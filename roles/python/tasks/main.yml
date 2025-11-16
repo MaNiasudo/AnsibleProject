@@ -4,10 +4,12 @@
     name:
       - python3-pip
     update_cache: yes
+
 - name: Create Dir
   ansible.builtin.file:
     path: ./basic-http-server
     state: directory
+    
 - name: install apache2
   ansible.builtin.package:
     name: apache2

@@ -1,0 +1,30 @@
+  # Install dependecis for docker
+- name: Install dependencies for docker 
+  ansible.builtin.package:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - apt-transport-https
+    - ca-certificates
+    - curl
+    - gnupg
+    - lsb-release
+
+  # Add docker GPG key 
+- name: Add Docker GPG key
+  ansible.builtin.apt_key:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    state: present
+
+  # Add docker apt repositroy 
+- name: Add Docker APT repository
+  ansible.builtin.apt_repository:
+    repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable
+    state: present
+
+  # Install Docker
+- name: Install Docker Engine
+  ansible.builtin.package:
+    name: docker-ce
+    state: present
+    update_cache: true

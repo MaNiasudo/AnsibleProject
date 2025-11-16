@@ -1,0 +1,12 @@
+  # Get that clone from debevaer github
+- name: clone from debeaver git
+  ansible.builtin.git:
+    repo: https://github.com/dbeaver/cloudbeaver-deploy
+    dest: /home/mania/myrepo
+
+  # dbeaver cloud documents say to make a new file from .example.env 
+- name: copy env example file and make a .env
+  ansible.builtin.command:
+    cmd: cp .env.example .env
+    chdir: /home/mania/myrepo/cloudbeaver-deploy
+    creates: .env
