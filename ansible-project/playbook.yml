@@ -1,0 +1,5 @@
+---
+- name: Example ansible playbook
+  hosts: small
+  remote_user: mania
+    - python
