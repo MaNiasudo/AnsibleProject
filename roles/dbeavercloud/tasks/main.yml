@@ -1,12 +1,14 @@
+
   # Get that clone from debevaer github
 - name: clone from debeaver git
   ansible.builtin.git:
     repo: https://github.com/dbeaver/cloudbeaver-deploy
-    dest: /home/mania/myrepo
+    dest: "{{ BASE_DIR }}/myrepo"
 
   # dbeaver cloud documents say to make a new file from .example.env 
-- name: copy env example file and make a .env
-  ansible.builtin.command:
-    cmd: cp .env.example .env
-    chdir: /home/mania/myrepo/cloudbeaver-deploy
-    creates: .env
+- name: Copy env example file into .env if missing
+  ansible.builtin.copy:
+    src: "{{ DEBEAVER_DIR }}/.env.example"
+    dest: "{{ DEBEAVER_DIR }}/.env"
+    remote_src: true # its from remote system not the controller
+    force: false # Prevent from overwriting it

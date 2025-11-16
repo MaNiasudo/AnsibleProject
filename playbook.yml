@@ -2,6 +2,10 @@
 - name: Example ansible playbook
   hosts: small
   remote_user: mania
+  vars:
+    DEBEAVER_DIR: /home/mania/myrepo/cloudbeaver-deploy
+    BASE_DIR: /home/mania
+
   become: true
   roles:
     - python
