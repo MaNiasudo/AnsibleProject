@@ -16,11 +16,12 @@
 - name: Ensure password is chganged in .env
   ansible.builtin.lineinfile:  # Use this model to change default password
     path: "{{ DEBEAVER_DIR }}/.env"
-    regexp: '^CLOUDBEAVER_DB_PASSWORD='
-    line: CLOUDBEAVER_DB_PASSWORD=newpassword
+    regexp: "^CLOUDBEAVER_DB_PASSWORD="
+    line: "CLOUDBEAVER_DB_PASSWORD=newpassword"
 
 
-- name : configure the env file base on dbeavercloud documents 
-  ansible.builtin.blockinfile: #We can add a block of code here or env 
-  path: "{{ DEBEAVER_DIR }}/.env"
-  line: REPLICA_COUNT_EE=1
+- name : add missed configuration in the .env file 
+  ansible.builtin.lineinfile: #We can add a block of code here with blockinline moudle if we need to add more variables
+    path: "{{ DEBEAVER_DIR }}/.env"
+    line: "REPLICA_COUNT_EE=1"
+    create: yes

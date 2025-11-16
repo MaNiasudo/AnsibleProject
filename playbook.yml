@@ -10,4 +10,6 @@
   roles:
     - python
     - git
+    - docker
+    - debeavercloud
   
