@@ -1,0 +1,17 @@
+
+
+
+- name: Pull Django app from docker hub
+  community.docker.docker_image_pull:
+    name: tahaefazati/mysite_backend
+    tag: latest
+    source: pull
+    
+
+- name: create django app container
+  community.docker.docker_container:
+    name: myapp
+    image: tahaefazati/mysite_backend:latest
+    state: started
+    ports:
+      - "8080:80"
