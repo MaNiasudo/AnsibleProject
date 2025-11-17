@@ -1,0 +1,20 @@
+
+
+
+- name: Create a Docker network
+  community.docker.docker_network:
+    name: "{{ docker_network_name }}"
+
+
+
+# Here we need to run postgresql and cerate a network between django / psql / cloudbeaver
+
+- name: Create db container and connect to network
+  community.docker.docker_container:
+    name: backend_db
+    image: "postgres:16-alpine"
+    networks:
+      - name: "{{ docker_network_name }}"
+
+  
+    

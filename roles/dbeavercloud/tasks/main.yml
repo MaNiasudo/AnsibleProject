@@ -12,6 +12,7 @@
     dest: "{{ DEBEAVER_DIR }}/.env"
     remote_src: true # its from remote system not the controller
     force: false # Prevent from overwriting it
+    mode: "0600"
 
 - name: Ensure password is chganged in .env
   ansible.builtin.lineinfile:  # Use this model to change default password
@@ -25,9 +26,15 @@
     path: "{{ DEBEAVER_DIR }}/.env"
     line: "REPLICA_COUNT_EE=1"
     create: yes
+    insertafter: EOF  # Default add at start of file this command add it at the end of the file
+ 
+
+- name:  Ensure that  envirement can access essential external services  # We need to ping the dbeaver and docker hub and then run our container
 
 
 - name: create and start docker compose services
   community.docker.docker_compose_v2:
     project_src: "{{ DEBEAVER_DIR }}"
-    state: present
+    state: restarted
+
+

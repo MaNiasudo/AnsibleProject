@@ -3,13 +3,16 @@
   hosts: small
   remote_user: mania
   vars:
-    DEBEAVER_DIR: /home/mania/myrepo/cloudbeaver-deploy
     BASE_DIR: /home/mania
+    DEBEAVER_DIR: "{{ BASE_DIR }}/myrepo/cloudbeaver-deploy"
+    docker_network_name: djangobeaver_network
 
   become: true
   roles:
     - python
     - git
     - docker
+    - database
+    - djangoapp
     - debeavercloud
   
