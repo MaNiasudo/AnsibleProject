@@ -15,5 +15,5 @@
     state: started
     ports:
       - "8080:80"
-    networks: 
-      name: "{{ docker_network_name }}"
+    # networks: 
+    #   name: "{{ docker_network_name }}"

@@ -3,7 +3,7 @@ node002 ansible_host=192.168.85.107
 
 [large]
 node001 ansible_host=192.168.85.105
-node003 ansible_host=192.168.85.106
+; node003 ansible_host=192.168.85.106
  
 
 
@@ -14,3 +14,4 @@ large
 [vms:vars]
 ansible_user=mania
 ansible_become_pass=1
+ansible_ssh_private_key_file=~/.ssh/id_rsa

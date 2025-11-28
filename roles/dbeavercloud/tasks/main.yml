@@ -32,7 +32,7 @@
 - name:  Ensure that  envirement can access essential external services  # We need to ping the dbeaver and docker hub and then run our container
 
 
-- name: create and start docker compose services
+- name: start docker compose services
   community.docker.docker_compose_v2:
     project_src: "{{ DEBEAVER_DIR }}"
     state: restarted

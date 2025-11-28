@@ -13,8 +13,8 @@
   community.docker.docker_container:
     name: backend_db
     image: "postgres:16-alpine"
-    networks:
-      - name: "{{ docker_network_name }}"
+    # networks:
+    #   - name: "{{ docker_network_name }}"
 
   
     

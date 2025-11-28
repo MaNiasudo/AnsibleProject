@@ -10,9 +10,9 @@
   become: true
   roles:
     - python
-    - git
-    - docker
-    - database
-    - djangoapp
-    - debeavercloud
+    # - git
+    # - docker
+    # - database
+    # - djangoapp
+    # - debeavercloud
   
