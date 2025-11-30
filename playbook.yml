@@ -1,6 +1,6 @@
 ---
 - name: Example ansible playbook
-  hosts: small
+  hosts: large
   remote_user: mania
   vars:
     BASE_DIR: /home/mania
@@ -9,10 +9,15 @@
 
   become: true
   roles:
-    - python
+    # - python
     # - git
-    # - docker
+    - docker
     # - database
-    # - djangoapp
+    - djangoapp
     # - debeavercloud
   
+
+
+
+
+

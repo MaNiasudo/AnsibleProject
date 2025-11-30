@@ -1,16 +1,15 @@
-  # Install dependecis for docker
+# Install dependencies for Docker
 - name: Ensure dependencies are installed
   ansible.builtin.package:
-    name: "{{ item }}"
+    name:
+      - apt-transport-https
+      - ca-certificates
+      - curl
+      - gnupg
+      - lsb-release
+      - bc
+      - expect
     state: present
-  loop:
-    - apt-transport-https
-    - ca-certificates
-    - curl
-    - gnupg
-    - lsb-release
-    - bc 
-    - expect
 
 - name: Create Docker GPG key directory
   ansible.builtin.file:
@@ -18,19 +17,36 @@
     state: directory
     mode: "0755"
 
-- name: Download Docker's official GPG key
+# Download the ASCII key
+- name: Download Docker's official GPG key (ASCII)
   ansible.builtin.get_url:
     url: https://download.docker.com/linux/ubuntu/gpg
-    dest: /etc/apt/keyrings/docker.asc
+    dest: /tmp/docker.asc
     mode: "0644"
 
-  # Add docker apt repositroy 
+# Convert ASCII key -> binary GPG key
+- name: Convert Docker ASCII key to GPG format
+  ansible.builtin.command:
+    cmd: gpg --dearmor -o /etc/apt/keyrings/docker.gpg /tmp/docker.asc
+  args:
+    creates: /etc/apt/keyrings/docker.gpg
+
+- name: Set permissions for Docker GPG key
+  ansible.builtin.file:
+    path: /etc/apt/keyrings/docker.gpg
+    mode: "0644"
+
+# Add Docker APT repository
 - name: Add Docker APT repository
   ansible.builtin.apt_repository:
-  repo: "deb [arch={{ ansible_architecture }} signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable"
-  state: present
+    repo: "deb [arch=amd64 signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable"
+    state: present
 
-  # Install Docker
+- name: Update apt cache
+  ansible.builtin.apt:
+    update_cache: true
+
+# Install Docker
 - name: Install Docker Engine packages
   ansible.builtin.package:
     name:
@@ -40,9 +56,8 @@
       - docker-buildx-plugin
       - docker-compose-plugin
     state: present
-    update_cache: true
 
-  # Start Docker
+# Start Docker
 - name: Ensure Docker service is enabled and started
   ansible.builtin.service:
     name: docker

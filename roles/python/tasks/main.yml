@@ -5,27 +5,47 @@
       - python3-pip
     update_cache: yes
 
-- name: Create Dir
-  ansible.builtin.file:
-    path: ./djangoapp
-    state: directory
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# - name: Create Dir
+#   ansible.builtin.file:
+#     path: ./djangoapp
+#     state: directory
 
     
-- name: install venv
-  command:
-    cmd: python3 -m pip install --user virtualenv
+# - name: install venv
+#   command:
+#     cmd: python3 -m pip install --user virtualenv
    
 
-- name: createvenv
-  command:
-    cmd: python3 -m venv .venv
-    path: ./djangoapp
+# - name: createvenv
+#   command:
+#     cmd: python3 -m venv .venv
+#     path: ./djangoapp
 
-- name: activate vm
-  command:
-    cmd: source .venv/bin/activate
+# - name: activate vm
+#   command:
+#     cmd: source .venv/bin/activate
 
-- name: install django
-  ansible.builtin.pip:
-    name:
-      - django
+# - name: install django
+#   ansible.builtin.pip:
+#     name:
+#       - django
+
+

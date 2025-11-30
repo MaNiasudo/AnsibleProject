@@ -1,11 +1,9 @@
-
-
-
+---
 - name: Pull Django app from docker hub
   community.docker.docker_image_pull:
     name: tahaefazati/mysite_backend
     tag: latest
-    source: pull
+    pull: always
     
 
 - name: create django app container
@@ -14,6 +12,6 @@
     image: tahaefazati/mysite_backend:latest
     state: started
     ports:
-      - "8080:80"
+      - "8080:8000"
     # networks: 
     #   name: "{{ docker_network_name }}"
